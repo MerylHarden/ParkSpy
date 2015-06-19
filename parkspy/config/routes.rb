@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
-  get 'maps/index'
+# get 'maps/index'
+#config/routes.rb
+root 'users#index', as: :users
+
+# get 'users' => 'users#index' 
+ get "users/new" => "users#new", as: :new_user 
+# post "users" => "users#create"
+
+# resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  # See how all your routtes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

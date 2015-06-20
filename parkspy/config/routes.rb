@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
 # get 'maps/index'
 #config/routes.rb
-root 'users#index', as: :users
+#root 'users#index'
 
 # get 'users' => 'users#index' 
- get "users/new" => "users#new", as: :new_user 
+ # get "users/new" => "users#new", as: :new_user 
 # post "users" => "users#create"
+# get "users/show" => "users#show", as: :user 
+resources :users
 
-# resources :users
+get '/login'     => 'sessions#new'
+post '/login'    => 'sessions#create'
+delete '/logout' => 'sessions#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routtes lay out with "rake routes".

@@ -10,17 +10,23 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params) 
+    #raise @user.inspect
     if @user.save
-      redirect_to users_path
+      redirect_to user_path(@user)
     else
       render :new
     end
   end
+
+  def show
+
+  end
+
 
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
-end
+end #of users controller
 

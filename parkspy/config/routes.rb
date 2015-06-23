@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :maps
   
-  get 'maps/index'
+  #get 'maps/index' => "maps#index", as: :maps
 
 # get 'maps/index'
 #config/routes.rb

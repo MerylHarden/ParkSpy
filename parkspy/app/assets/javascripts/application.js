@@ -20,7 +20,7 @@
 
 
 function initialize() {
-  	console.log("initializing")
+  	// console.log("initializing") <== CHECKPOINT
 
     //sets center to city of santa monica
     var center = new google.maps.LatLng(34.0218628, -118.4804206)
@@ -60,18 +60,18 @@ function initialize() {
     map.mapTypes.set('santamonicamap', SantaMonicaRoadMapType);
     map.setMapTypeId('santamonicamap');
 
-    console.log("initialized")
+    // console.log("initialized") <== CHECKPOINT
 
     //adds traffic layer to map
     var trafficLayer = new google.maps.TrafficLayer();
     trafficLayer.setMap(map);
 
-    //API call on parking lots/structures
+    //API call for parking lots/structures
     var lots = [];
     $.ajax("https://parking.api.smgov.net/lots/", {
         success: function(data) {
             lots = data;
-            // console.log(lots.length);
+            // console.log(lots.length); <== CHECKPOINT
 
             //collects and plots parking lots/structures on the map in clusters
             var lotMarkers = [];
@@ -88,6 +88,18 @@ function initialize() {
                 getLotData(lotData, lotMarker);
             }
             var lotMarkerCluster = new MarkerClusterer(map, lotMarkers);
+
+            //captures lot data for infowindow when lot marker is clicked
+            var lotInfoWindow = new google.maps.InfoWindow();
+            function getLotData(lD, lM) {
+                google.maps.event.addListener(lM, 'click', function() {
+                    lotInfoWindow.open(map, lM);
+                    lotInfoWindow.setContent(
+                        "<p>" + "<b>" + lD.name + "</b>" + "<br />"
+                        + "Spaces: " + String(lD.available_spaces) + "</p>"
+                    );
+                })
+            }
         }
     });
 
@@ -107,7 +119,7 @@ function initialize() {
 
 //initializer
 function loadScript() {
-	console.log("loading script")
+	// console.log("loading script") <== CHECKPOINT
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +

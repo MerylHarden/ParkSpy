@@ -124,7 +124,44 @@ function initialize() {
         }
     });
 
+    //API call for parking meters
+    var meters = [];
+    $.ajax("https://parking.api.smgov.net/meters/", {
+        success: function(data) {
+            meters = data;
+            console.log(meters.length)
 
+            //collects and plots parking meters on the map in clusters
+            var meterMarkers = [];
+            for (var i = 0; i < meters.length; i++) {
+
+                //gets icon for meter status
+                var getIcon = function() {
+                    if (meterData.active == true) {
+                        return "assets/meter-icon.png";
+                    } else {
+                        return "assets/broken-meter-icon.png"
+                    };
+                };
+                
+                var meterData = meters[i];
+                var meterPosition = new google.maps.LatLng(meterData.latitude, meterData.longitude)
+                var meterMarker = new google.maps.Marker({
+                    position: meterPosition,
+                    map: map
+                });
+                meterMarker.setIcon(getIcon());
+                meterMarkers.push(meterMarker);
+                // getMeterData(meterData, meterMarker);
+            }
+            var meterClusterOptions = {
+                maxZoom: 19
+            }
+            var meterMarkerCluster = new MarkerClusterer(map, meterMarkers, meterClusterOptions);
+
+
+        }
+    }) 
 
 
 

@@ -27,21 +27,42 @@ function initialize() {
 
     // sets map style
     var mapStyle = [
-          {
-            "featureType": "road",
-            "elementType": "geometry",
-            "stylers": [
-              { "visibility": "on" },
-              { "color": "#808080" },
-              { "weight": 0.1 }
-            ]
-          }
-        ]  
+        {
+          "featureType": "landscape",
+          "elementType": "geometry",
+          "stylers": [
+            { "visibility": "on" },
+            { "color": "#f1f1f1" }
+          ]
+        },{
+          "featureType": "road",
+          "elementType": "geometry",
+          "stylers": [
+            { "visibility": "on" },
+            { "color": "#808080" },
+            { "weight": 0.1 }
+          ]
+        },{
+          "featureType": "poi",
+          "elementType": "geometry.fill",
+          "stylers": [
+            { "visibility": "on" },
+            { "color": "#f8f8f8" }
+          ]
+        },{
+          "featureType": "administrative",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            { "visibility": "on" },
+            { "color": "#cc3333" }
+          ]
+        }
+      ]  
 
     //sets map options
         var mapOptions = {
           center: center,
-          zoom: 10,
+          zoom: 14,
           mapTypeControlOptions: {
               mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'santamonicamap']
           }

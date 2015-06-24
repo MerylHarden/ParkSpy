@@ -6,13 +6,13 @@ Rails.application.routes.draw do
 
 # get 'maps/index'
 #config/routes.rb
-root 'users#index', as: :users
+# root 'users#index', as: :users
 
 # get 'users' => 'users#index' 
- get "users/new" => "users#new", as: :new_user 
+ # get "users/new" => "users#new", as: :new_user 
 # post "users" => "users#create"
 
-# resources :users
+resources :users
 
 
   # The priority is based upon order of creation: first created -> highest priority.

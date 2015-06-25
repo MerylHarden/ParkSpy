@@ -129,7 +129,7 @@ function initialize() {
     $.ajax("https://parking.api.smgov.net/meters/", {
         success: function(data) {
             meters = data;
-            console.log(meters.length)
+            // console.log(meters.length); <== CHECKPOINT
 
             //collects and plots parking meters on the map in clusters
             var meterMarkers = [];
@@ -152,7 +152,7 @@ function initialize() {
                 });
                 meterMarker.setIcon(getIcon());
                 meterMarkers.push(meterMarker);
-                // getMeterData(meterData, meterMarker);
+                getMeterData(meterData, meterMarker);
             }
             var meterClusterOptions = {
                 maxZoom: 19
@@ -160,19 +160,56 @@ function initialize() {
             var meterMarkerCluster = new MarkerClusterer(map, meterMarkers, meterClusterOptions);
 
 
+            //captures meter data for infowindow when meter marker is clicked
+            var meterInfoWindow = new google.maps.InfoWindow();
+            function getMeterData(mD, mM) {
+
+                //function that returns meter status
+                var getMeterStatus = function() {
+                    if (mD.active == true) {
+                        return "Status: Working";
+                    } else {
+                        return "Status: Not available or out of service";
+                    }
+                }
+
+                //adds listener to each marker to display infowindow when clicked
+                google.maps.event.addListener(mM, "click", function() {
+
+                    //checks current meter availability
+                    var meterSession = [];
+                    $.ajax("https://parking.api.smgov.net/meters/" + mD.meter_id + "/events/since/0", {
+                        success: function(data) {
+                            meterSession = data;
+
+                            //gets meter session detail
+                            var getSessionDetail = function() {
+                                var sessionDetail = meterSession;
+
+                                if ((sessionDetail.length > 0) && (sessionDetail[0].event_type == "SS")) {
+                                    return "Availability: Occupied";
+                                } else if ((sessionDetail.length > 0) && (sessionDetail[0].event_type == "SE")) {
+                                    return "Availability: Vacant, but not for long!";
+                                } else {
+                                    return "Availability: Sorry, no details available.";
+                                };
+                            };
+
+                            //info window that pops up on click
+                            meterInfoWindow.open(map, mM);
+                            meterInfoWindow.setContent(
+                                "<p>" + "ID: " + "<b>" + String(mD.meter_id) + "</b>" + "</p>"
+                                + "Street: " + "<b>" + mD.street_address + "</b>" + "<br />"
+                                + getMeterStatus() + "<br />"
+                                + getSessionDetail()
+                            )
+                        }
+                    })
+                })
+            }
         }
     }) 
-
-
-
 }
-
-
-
-
-
-
-
 
 
 //initializer
@@ -186,3 +223,4 @@ function loadScript() {
 }
 
 window.onload = loadScript;
+

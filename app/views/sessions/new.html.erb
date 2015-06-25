@@ -1,28 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>ParkSpy</title>
-
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <link href="css/freelancer.css" rel="stylesheet">
-
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-
 </head>
-
 <body id="page-top" class="index">
-
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header page-scroll">
@@ -34,7 +25,6 @@
                 </button>
                 <a class="navbar-brand" href="#page-top">ParkSpy</a>
             </div>
-
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="hidden">
@@ -47,13 +37,12 @@
                         <a href="#about">Login</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#contact">Contact</a>
+                        <a href="#contact">Register</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
     <header>
         <div class="container">
             <div class="row">
@@ -68,7 +57,6 @@
             </div>
         </div>
     </header>
-
     <section id="portfolio">
         <div class="container">
             <div class="row">
@@ -93,19 +81,31 @@
             </div>
         </div>
     </section>
-
     <section class="success" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Login</h2>
+                    <div class="container">
+                        <form class="form-signin">
+                            <label for="inputEmail" class="sr-only">Email address</label>
+                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                            <label for="inputPassword" class="sr-only">Password</label>
+                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                            <div class="checkbox">
+                              <label>
+                                <input type="checkbox" value="remember-me"> Remember me
+                              </label>
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                        </form>
+                    </div>
                     <hr class="star-light">
                 </div>
             </div>
-            
         </div>
     </section>
-
     <footer class="text-center">
         <div class="footer-above">
             <div class="container">
@@ -151,13 +151,10 @@
             </div>
         </div>
     </footer>
-
     <div class="scroll-top page-scroll visible-xs visible-sm">
         <a class="btn btn-primary" href="#page-top">
             <i class="fa fa-chevron-up"></i>
         </a>
     </div>
-
 </body>
-
 </html>

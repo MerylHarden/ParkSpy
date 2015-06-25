@@ -114,11 +114,11 @@ function initialize() {
             var lotInfoWindow = new google.maps.InfoWindow();
             function getLotData(lD, lM) {
                 google.maps.event.addListener(lM, 'click', function() {
-                    lotInfoWindow.open(map, lM);
-                    lotInfoWindow.setContent(
-                        "<p>" + "<b>" + lD.name + "</b>" + "<br />"
-                        + "Spaces: " + String(lD.available_spaces) + "</p>"
-                    );
+                    // lotInfoWindow.open(map, lM);
+                    lotmsg = ("<p>" + "<b>" + lD.name + "</b>" + "<br />"
+                        + "Spaces: " + String(lD.available_spaces) + "</p>")
+                    // lotInfoWindow.setContent(lotmsg);
+                    $('#textbox').html(lotmsg);
                 })
             }
         }
@@ -196,13 +196,15 @@ function initialize() {
                             };
 
                             //info window that pops up on click
-                            meterInfoWindow.open(map, mM);
-                            meterInfoWindow.setContent(
+                            // meterInfoWindow.open(map, mM);
+                            metermsg = (
                                 "<p>" + "ID: " + "<b>" + String(mD.meter_id) + "</b>" + "</p>"
                                 + "Street: " + "<b>" + mD.street_address + "</b>" + "<br />"
                                 + getMeterStatus() + "<br />"
                                 + getSessionDetail()
                             )
+                            // meterInfoWindow.setContent(metermsg)
+                           $('#textbox').html(metermsg);
                         }
                     })
                 })

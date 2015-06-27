@@ -50,11 +50,24 @@
 #textbox {
 	display: block;
 	position: fixed;
+    font-family: Montserrat;
+    font-size: 26px;
+    color: darkblue;
 	right: 30px;
 	top: 210px;
 	width: 45%;
 	height: 45%;
-	background-color: dodgerblue;
+	background-color: tomato;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    text-shadow: 1px 1px 0 rgba(94,94,94,1);
+    text-align: center;
+}
+
+#results {
+    margin: auto 0;
+    padding-top: 10%;
 }
 
 #score {
@@ -452,4 +465,10 @@ padding: 5px 11px 0px 11px;
 font-family: Roboto;
 font-size: 13px;
 font-weight: 300;
+}
+
+#textbox {
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }

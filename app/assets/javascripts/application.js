@@ -88,129 +88,129 @@ function initialize() {
     trafficLayer.setMap(map);
 
     //API call for parking lots/structures
-    // var lots = [];
-    // $.ajax("https://parking.api.smgov.net/lots/", {
-    //     success: function(data) {
-    //         lots = data;
-    //         // console.log(lots.length); <== CHECKPOINT
+    var lots = [];
+    $.ajax("https://parking.api.smgov.net/lots/", {
+        success: function(data) {
+            lots = data;
+            // console.log(lots.length); <== CHECKPOINT
 
-    //         //collects and plots parking lots/structures on the map in clusters
-    //         var lotMarkers = [];
-    //         for (var i = 0; i < lots.length; i++) {
-    //             var lotData = lots[i];
-    //             var lotImage = '/assets/lot-icon.png';
-    //             var lotPosition = new google.maps.LatLng(lotData.latitude, lotData.longitude);
-    //             var lotMarker = new google.maps.Marker({
-    //                 position: lotPosition,
-    //                 map: map,
-    //                 icon: lotImage
-    //             });
-    //             lotMarkers.push(lotMarker);
-    //             getLotData(lotData, lotMarker);
-    //         }
-    //         var lotMarkerCluster = new MarkerClusterer(map, lotMarkers);
+            //collects and plots parking lots/structures on the map in clusters
+            var lotMarkers = [];
+            for (var i = 0; i < lots.length; i++) {
+                var lotData = lots[i];
+                var lotImage = '/assets/lot-icon.png';
+                var lotPosition = new google.maps.LatLng(lotData.latitude, lotData.longitude);
+                var lotMarker = new google.maps.Marker({
+                    position: lotPosition,
+                    map: map,
+                    icon: lotImage
+                });
+                lotMarkers.push(lotMarker);
+                getLotData(lotData, lotMarker);
+            }
+            var lotMarkerCluster = new MarkerClusterer(map, lotMarkers);
 
-    //         //captures lot data for infowindow when lot marker is clicked
-    //         var lotInfoWindow = new google.maps.InfoWindow();
-    //         function getLotData(lD, lM) {
-    //             google.maps.event.addListener(lM, 'click', function() {
-    //                 // lotInfoWindow.open(map, lM);
-    //                 lotmsg = ("<p>" + "<b>" + lD.name + "</b>" + "<br />"
-    //                     + "Spaces: " + String(lD.available_spaces) + "</p>")
-    //                 // lotInfoWindow.setContent(lotmsg);
-    //                 $('#textbox').html(lotmsg);
-    //             })
-    //         }
-    //     }
-    // });
+            //captures lot data for infowindow when lot marker is clicked
+            var lotInfoWindow = new google.maps.InfoWindow();
+            function getLotData(lD, lM) {
+                google.maps.event.addListener(lM, 'click', function() {
+                    // lotInfoWindow.open(map, lM);
+                    lotmsg = ("<p>" + "<b>" + lD.name + "</b>" + "<br />"
+                        + "Spaces: " + String(lD.available_spaces) + "</p>")
+                    // lotInfoWindow.setContent(lotmsg);
+                    $('#textbox').html(lotmsg);
+                })
+            }
+        }
+    });
 
     //API call for parking meters
-    // var meters = [];
-    // $.ajax("https://parking.api.smgov.net/meters/", {
-    //     success: function(data) {
-    //         meters = data;
-    //         // console.log(meters.length); <== CHECKPOINT
+    var meters = [];
+    $.ajax("https://parking.api.smgov.net/meters/", {
+        success: function(data) {
+            meters = data;
+            // console.log(meters.length); <== CHECKPOINT
 
-    //         //collects and plots parking meters on the map in clusters
-    //         var meterMarkers = [];
-    //         for (var i = 0; i < meters.length; i++) {
+            //collects and plots parking meters on the map in clusters
+            var meterMarkers = [];
+            for (var i = 0; i < meters.length; i++) {
 
-    //             //gets icon for meter status
-    //             var getIcon = function() {
-    //                 if (meterData.active == true) {
-    //                     return "assets/meter-icon.png";
-    //                 } else {
-    //                     return "assets/broken-meter-icon.png"
-    //                 };
-    //             };
+                //gets icon for meter status
+                var getIcon = function() {
+                    if (meterData.active == true) {
+                        return "assets/meter-icon.png";
+                    } else {
+                        return "assets/broken-meter-icon.png"
+                    };
+                };
                 
-    //             var meterData = meters[i];
-    //             var meterPosition = new google.maps.LatLng(meterData.latitude, meterData.longitude)
-    //             var meterMarker = new google.maps.Marker({
-    //                 position: meterPosition,
-    //                 map: map
-    //             });
-    //             meterMarker.setIcon(getIcon());
-    //             meterMarkers.push(meterMarker);
-    //             getMeterData(meterData, meterMarker);
-    //         }
-    //         var meterClusterOptions = {
-    //             maxZoom: 19
-    //         }
-    //         var meterMarkerCluster = new MarkerClusterer(map, meterMarkers, meterClusterOptions);
+                var meterData = meters[i];
+                var meterPosition = new google.maps.LatLng(meterData.latitude, meterData.longitude)
+                var meterMarker = new google.maps.Marker({
+                    position: meterPosition,
+                    map: map
+                });
+                meterMarker.setIcon(getIcon());
+                meterMarkers.push(meterMarker);
+                getMeterData(meterData, meterMarker);
+            }
+            var meterClusterOptions = {
+                maxZoom: 19
+            }
+            var meterMarkerCluster = new MarkerClusterer(map, meterMarkers, meterClusterOptions);
 
 
-    //         //captures meter data for infowindow when meter marker is clicked
-    //         var meterInfoWindow = new google.maps.InfoWindow();
-    //         function getMeterData(mD, mM) {
+            //captures meter data for infowindow when meter marker is clicked
+            var meterInfoWindow = new google.maps.InfoWindow();
+            function getMeterData(mD, mM) {
 
-    //             //function that returns meter status
-    //             var getMeterStatus = function() {
-    //                 if (mD.active == true) {
-    //                     return "Status: Working";
-    //                 } else {
-    //                     return "Status: Not available or out of service";
-    //                 }
-    //             }
+                //function that returns meter status
+                var getMeterStatus = function() {
+                    if (mD.active == true) {
+                        return "Status: Working";
+                    } else {
+                        return "Status: Not available or out of service";
+                    }
+                }
 
-    //             //adds listener to each marker to display infowindow when clicked
-    //             google.maps.event.addListener(mM, "click", function() {
+                //adds listener to each marker to display infowindow when clicked
+                google.maps.event.addListener(mM, "click", function() {
 
-    //                 //checks current meter availability
-    //                 var meterSession = [];
-    //                 $.ajax("https://parking.api.smgov.net/meters/" + mD.meter_id + "/events/since/0", {
-    //                     success: function(data) {
-    //                         meterSession = data;
+                    //checks current meter availability
+                    var meterSession = [];
+                    $.ajax("https://parking.api.smgov.net/meters/" + mD.meter_id + "/events/since/0", {
+                        success: function(data) {
+                            meterSession = data;
 
-    //                         //gets meter session detail
-    //                         var getSessionDetail = function() {
-    //                             var sessionDetail = meterSession;
+                            //gets meter session detail
+                            var getSessionDetail = function() {
+                                var sessionDetail = meterSession;
 
-    //                             if ((sessionDetail.length > 0) && (sessionDetail[0].event_type == "SS")) {
-    //                                 return "Availability: Occupied";
-    //                             } else if ((sessionDetail.length > 0) && (sessionDetail[0].event_type == "SE")) {
-    //                                 return "Availability: Vacant, but not for long!";
-    //                             } else {
-    //                                 return "Availability: Sorry, no details available.";
-    //                             };
-    //                         };
+                                if ((sessionDetail.length > 0) && (sessionDetail[0].event_type == "SS")) {
+                                    return "Availability: Occupied";
+                                } else if ((sessionDetail.length > 0) && (sessionDetail[0].event_type == "SE")) {
+                                    return "Availability: Vacant, but not for long!";
+                                } else {
+                                    return "Availability: Sorry, no details available.";
+                                };
+                            };
 
-    //                         //info window that pops up on click
-    //                         // meterInfoWindow.open(map, mM);
-    //                         metermsg = (
-    //                             "<p>" + "ID: " + "<b>" + String(mD.meter_id) + "</b>" + "</p>"
-    //                             + "Street: " + "<b>" + mD.street_address + "</b>" + "<br />"
-    //                             + getMeterStatus() + "<br />"
-    //                             + getSessionDetail()
-    //                         )
-    //                         // meterInfoWindow.setContent(metermsg)
-    //                        $('#textbox').html(metermsg);
-    //                     }
-    //                 })
-    //             })
-    //         }
-    //     }
-    // }) 
+                            //info window that pops up on click
+                            // meterInfoWindow.open(map, mM);
+                            metermsg = (
+                                "<p>" + "ID: " + "<b>" + String(mD.meter_id) + "</b>" + "</p>"
+                                + "Street: " + "<b>" + mD.street_address + "</b>" + "<br />"
+                                + getMeterStatus() + "<br />"
+                                + getSessionDetail()
+                            )
+                            // meterInfoWindow.setContent(metermsg)
+                           $('#textbox').html(metermsg);
+                        }
+                    })
+                })
+            }
+        }
+    }) 
 
 
     //search box for google places

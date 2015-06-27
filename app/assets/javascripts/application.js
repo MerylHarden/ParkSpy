@@ -211,59 +211,73 @@ function initialize() {
             }
         }
     }) 
+
+
+    //search box for google places
+    var markers = [];
+
+    var defaultBounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(34.015673, -118.502505),
+        new google.maps.LatLng(34.023391, -118.479931));
+    map.fitBounds(defaultBounds);
+
+    // Create the search box and link it to the UI element.
     var input = /** @type {HTMLInputElement} */(
-          document.getElementById('search'));
-      map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        document.getElementById('pac-input'));
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-      var searchBox = new google.maps.places.SearchBox(
-        /** @type {HTMLInputElement} */(input));
+    var searchBox = new google.maps.places.SearchBox(
+      /** @type {HTMLInputElement} */(input));
 
-      // Listen for the event fired when the user selects an item from the
-      // pick list. Retrieve the matching places for that item.
-      google.maps.event.addListener(searchBox, 'places_changed', function() {
-        var places = searchBox.getPlaces();
+    // Listen for the event fired when the user selects an item from the
+    // pick list. Retrieve the matching places for that item.
+    google.maps.event.addListener(searchBox, 'places_changed', function() {
+      var places = searchBox.getPlaces();
 
-        if (places.length == 0) {
-          return;
-        }
-        for (var i = 0, marker; marker = markers[i]; i++) {
-          marker.setMap(null);
-        }
+      if (places.length == 0) {
+        return;
+      }
+      for (var i = 0, marker; marker = markers[i]; i++) {
+        marker.setMap(null);
+      }
 
-        // For each place, get the icon, place name, and location.
-        markers = [];
-        var bounds = new google.maps.LatLngBounds();
-        for (var i = 0, place; place = places[i]; i++) {
-          var image = {
-            url: place.icon,
-            size: new google.maps.Size(71, 71),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(25, 25)
-          };
+      // For each place, get the icon, place name, and location.
+      markers = [];
+      var bounds = new google.maps.LatLngBounds();
+      for (var i = 0, place; place = places[i]; i++) {
+        var image = {
+          url: place.icon,
+          size: new google.maps.Size(71, 71),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(17, 34),
+          scaledSize: new google.maps.Size(25, 25)
+        };
 
-          // Create a marker for each place.
-          var marker = new google.maps.Marker({
-            map: map,
-            icon: image,
-            title: place.name,
-            position: place.geometry.location
-          });
+        // Create a marker for each place.
+        var marker = new google.maps.Marker({
+          map: map,
+          icon: image,
+          title: place.name,
+          position: place.geometry.location
+        });
 
-          markers.push(marker);
+        markers.push(marker);
 
-          bounds.extend(place.geometry.location);
-        }
+        bounds.extend(place.geometry.location);
+      }
 
-        map.fitBounds(bounds);
-      });
+      map.fitBounds(bounds);
+    });
 
-      // Bias the SearchBox results towards places that are within the bounds of the
-      // current map's viewport.
-      google.maps.event.addListener(map, 'bounds_changed', function() {
-        var bounds = map.getBounds();
-        searchBox.setBounds(bounds);
-      });
+    // Bias the SearchBox results towards places that are within the bounds of the
+    // current map's viewport.
+    google.maps.event.addListener(map, 'bounds_changed', function() {
+      var bounds = map.getBounds();
+      searchBox.setBounds(bounds);
+    });
+
+
+
 }
 
 
@@ -272,7 +286,7 @@ function loadScript() {
 	// console.log("loading script") <== CHECKPOINT
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
+  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places' +
       '&signed_in=true&callback=initialize';
   document.body.appendChild(script);
 }

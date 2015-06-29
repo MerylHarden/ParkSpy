@@ -16,6 +16,8 @@ resources :users
 
 resources :sessions
 
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routtes lay out with "rake routes".
 
@@ -65,9 +67,7 @@ resources :sessions
   #   resources :photos, concerns: :toggleable
 
   # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+    namespace :api do
+      resources :meters, only: [:index, :show, :create, :update, :destroy]
+    end
 end

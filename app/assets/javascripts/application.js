@@ -118,7 +118,8 @@ function initialize() {
                     lotmsg = ("<p>" + "<b>" + lD.name + " Parking Lot" + "</b>" + "<br />"
                         + "Vacant Spaces: " + String(lD.available_spaces) + "</p>")
                     // lotInfoWindow.setContent(lotmsg);
-                    $('#results').html(lotmsg);
+                    $('#textbox').html(lotmsg);
+                    console.log(lotmsg);
                 })
             }
         }
@@ -204,7 +205,8 @@ function initialize() {
                                 + getSessionDetail()
                             )
                             // meterInfoWindow.setContent(metermsg)
-                           $('#results').html(metermsg);
+                           $('#textbox').html(metermsg);
+                           console.log(metermsg);
                         }
                     })
                 })

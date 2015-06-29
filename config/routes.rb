@@ -2,6 +2,14 @@ Rails.application.routes.draw do
 
   resources :maps
   
+  get "users" => "users#index"
+  get "users/new" => "users#new"
+  post "users" => "users#create"
+
+
+  get "login" => "sessions#new"
+  post "login" => "sessions#create"
+  delete "logout" => "sessions#destroy"
   #get 'maps/index' => "maps#index", as: :maps
 
 # get 'maps/index'
@@ -12,9 +20,9 @@ Rails.application.routes.draw do
  # get "users/new" => "users#new", as: :new_user 
 # post "users" => "users#create"
 
-resources :users
+#resources :users
 
-resources :sessions
+#resources :sessions
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routtes lay out with "rake routes".

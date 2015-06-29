@@ -35,7 +35,7 @@ gem 'httparty'
 # gem 'capistrano-rails', group: :development
 
 
-ruby '2.1.5'
+ruby '2.2.2'
 
 group :production do
   gem 'rails_12factor'

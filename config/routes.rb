@@ -68,6 +68,6 @@ resources :sessions
 
   # Example resource route within a namespace:
     namespace :api do
-      resources :meters, only: [:index]
+      resources :meters, only: [:index, :show, :create, :update, :destroy]
     end
 end
